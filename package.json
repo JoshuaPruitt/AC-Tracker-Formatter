@@ -1,0 +1,14 @@
+{
+  "name": "ac-formatter",
+  "version": "1.0.0",
+  "description": "A json data formatter for ac-tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.7.3"
+  }
+}
