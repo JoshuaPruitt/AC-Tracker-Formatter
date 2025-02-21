@@ -60,30 +60,40 @@ export const ${name} = [
         for (let i = 0; i < data.length; i++){
             const currentFilePath = data[i] // Gets the full path of the current file
             const parentDirPath = path.dirname(currentFilePath); // Extracts the parent directory path
-            const updatedParentDirPath: string = parentDirPath.replace(directory, "")
-            const currentItemName: string = currentFilePath.replace(updatedParentDirPath, '')
+
+            let updatedParentDirPath: string = parentDirPath.replace(directory, "")
+            updatedParentDirPath = updatedParentDirPath.replace(/\\/g, '');
+            updatedParentDirPath = updatedParentDirPath.toLowerCase()
+
+            let currentItemName: string = currentFilePath.replace(parentDirPath, '')
+
+            let UcurrentItemName = currentItemName.replace(/\\/g, ''); // replace all forward and backward slashes and make all lowercase
+            UcurrentItemName = UcurrentItemName.toLowerCase()
+            UcurrentItemName = UcurrentItemName.replace('_nh_icon.png', '');
+            UcurrentItemName = UcurrentItemName.replace("_", ' ');
+            UcurrentItemName = UcurrentItemName.charAt(0).toUpperCase() + UcurrentItemName.slice(1) // change first letter to uppercase
 
             console.log("Item name!", currentItemName)
 
             console.log("parent dir path:", updatedParentDirPath)
 
-            if (parentDirPath == "\bugs" || "\bug"){
-                const item = this.attachDataPartial(1, currentItemName, directory)
+            if (updatedParentDirPath == "bugs" || updatedParentDirPath == "bug"){
+                const item = this.attachDataPartial(1, UcurrentItemName, parentDirPath + currentItemName)
                 console.log(item)
                 formattedData += item
 
-            } else if (parentDirPath == '\fish' || '\fishes'){
-                const item = this.attachDataPartial(2, currentItemName, directory)
+            } else if (updatedParentDirPath == 'fish' || updatedParentDirPath == 'fishes'){
+                const item = this.attachDataPartial(2, UcurrentItemName, parentDirPath + currentItemName)
                 console.log(item)
                 formattedData += item
 
-            } else if (parentDirPath == '\sea-creature' || '\sea-critter'){
-                const item = this.attachDataPartial(3, currentItemName, directory)
+            } else if (updatedParentDirPath == 'sea-creature' || updatedParentDirPath == 'sea-critter' || updatedParentDirPath == 'sea-creatures' || updatedParentDirPath == 'sea-critters'){
+                const item = this.attachDataPartial(3, UcurrentItemName, parentDirPath + currentItemName)
                 console.log(item)
                 formattedData += item
 
             } else {
-                const item = this.attachDataPartial(0, currentItemName, directory)
+                const item = this.attachDataPartial(0, UcurrentItemName, parentDirPath + currentItemName)
                 console.log(item)
                 console.log("Item is not a fish, bug, or sea creature!!")
                 formattedData += item
@@ -91,7 +101,6 @@ export const ${name} = [
         };
 
         formattedData += footer
-        console.log(formattedData)
         return formattedData
     }
 }
