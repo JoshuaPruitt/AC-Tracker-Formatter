@@ -57,12 +57,12 @@ const writeFile = (folder: string, fileName: string, data: any) => {
 }
 
 export function createFile (folder: string, fileName: string, data: any) {
-    const updatedData = stringify(data)
+    // const updatedData = stringify(data)
     if (checkfolderExists(folder)){
-        writeFile(folder, fileName, updatedData)
+        writeFile(folder, fileName, data)
     } else {
         createFolder(folder)
-        createFile(folder, fileName, updatedData)
+        createFile(folder, fileName, data)
     }
 }
 
