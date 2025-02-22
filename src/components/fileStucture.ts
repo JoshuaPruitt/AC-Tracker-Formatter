@@ -11,9 +11,11 @@ import ${name} from "${path}";`;
     };
 
     attachHeader(name: string) {
+        let updatedName = name.replace('.ts', '');
+        updatedName = updatedName.replace('-', '_');
         const data = 
 `
-export const ${name} = [
+export const ${updatedName} = [
 `;
         return data;
     };

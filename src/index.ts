@@ -39,7 +39,7 @@ inquirer
 
         //create formatted data
         const newFile = new FileBuild
-        const data = newFile.formatData(files, directory, 'data')
+        const data = newFile.formatData(files, directory, fileName)
 
         //create an output file
         createFile("./output/", fileName, data)
