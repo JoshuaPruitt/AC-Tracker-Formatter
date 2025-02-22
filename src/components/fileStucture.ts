@@ -1,8 +1,14 @@
-import fs from 'fs';
 import path from 'path';
 // The pieces that will be put together to create a data file
 
 class FileBuild {
+
+    attachImport(name: string, path: string) {
+        const data =
+`
+import ${name} from "${path}";`;
+        return data;
+    };
 
     attachHeader(name: string) {
         const data = 
@@ -18,7 +24,7 @@ export const ${name} = [
     {
         type : ${type},
         name : "${name}",
-        icon : "${icon}",
+        icon : ${icon},
         description : "${description}",
         month : ${month},
         time_of_day : ${time_of_day}
@@ -33,7 +39,7 @@ export const ${name} = [
     {
         type : ${type},
         name : "${name}",
-        icon : "${icon}",
+        icon : ${icon},
         description : "",
         month : 1,
         time_of_day : 1
@@ -57,6 +63,10 @@ export const ${name} = [
 
         formattedData += header
 
+        let parentDirChunk = path.dirname(directory)
+        parentDirChunk = path.dirname(parentDirChunk)
+        // parentDirChunk = parentDirChunk.replace(/\\/g, '/');
+
         for (let i = 0; i < data.length; i++){
             const currentFilePath = data[i] // Gets the full path of the current file
             const parentDirPath = path.dirname(currentFilePath); // Extracts the parent directory path
@@ -73,32 +83,49 @@ export const ${name} = [
             UcurrentItemName = UcurrentItemName.replace("_", ' ');
             UcurrentItemName = UcurrentItemName.charAt(0).toUpperCase() + UcurrentItemName.slice(1) // change first letter to uppercase
 
+            let iconPath = parentDirPath + currentItemName;
+            iconPath = iconPath.replace(parentDirChunk, '../..'); // Replace the directory chunk with a ../ for imports
+            iconPath = iconPath.replace(/\\/g, '/'); // replace all forward slashes with backslashes
+
+            let itemImportName = UcurrentItemName + 'Icon';
+            itemImportName = itemImportName.replace(' ', '');
+            itemImportName = itemImportName.replace('-', '');
+            itemImportName = itemImportName.replace("'", '');
+            itemImportName = itemImportName.replace('(', "");
+            itemImportName = itemImportName.replace(')', "");
+
+            let importHead = this.attachImport(itemImportName, iconPath);
+            formattedData = importHead + formattedData;
+
+
             console.log("Item name!", currentItemName)
 
             console.log("parent dir path:", updatedParentDirPath)
 
             if (updatedParentDirPath == "bugs" || updatedParentDirPath == "bug"){
-                const item = this.attachDataPartial(1, UcurrentItemName, parentDirPath + currentItemName)
+                const item = this.attachDataPartial(1, UcurrentItemName, itemImportName)
                 console.log(item)
                 formattedData += item
 
             } else if (updatedParentDirPath == 'fish' || updatedParentDirPath == 'fishes'){
-                const item = this.attachDataPartial(2, UcurrentItemName, parentDirPath + currentItemName)
+                const item = this.attachDataPartial(2, UcurrentItemName, itemImportName)
                 console.log(item)
                 formattedData += item
 
             } else if (updatedParentDirPath == 'sea-creature' || updatedParentDirPath == 'sea-critter' || updatedParentDirPath == 'sea-creatures' || updatedParentDirPath == 'sea-critters'){
-                const item = this.attachDataPartial(3, UcurrentItemName, parentDirPath + currentItemName)
+                const item = this.attachDataPartial(3, UcurrentItemName, itemImportName)
                 console.log(item)
                 formattedData += item
 
             } else {
-                const item = this.attachDataPartial(0, UcurrentItemName, parentDirPath + currentItemName)
+                const item = this.attachDataPartial(0, UcurrentItemName, itemImportName)
                 console.log(item)
                 console.log("Item is not a fish, bug, or sea creature!!")
                 formattedData += item
             }
         };
+
+        console.log("chunk",parentDirChunk)
 
         formattedData += footer
         return formattedData
