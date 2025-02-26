@@ -1,16 +1,7 @@
 import fs from 'fs';
+import inquirer from 'inquirer';
 import path from 'path';
 
-import { stringify } from 'querystring';
-
-// const data = 
-// `
-// const data = [
-//     {
-//         name : "book1"
-//     }
-// ]
-// `;
 
 let i = 0;
 
@@ -58,6 +49,15 @@ const writeFile = (folder: string, fileName: string, data: any) => {
 
 export function createFile (folder: string, fileName: string, data: any) {
     // const updatedData = stringify(data)
+    if (checkfolderExists(folder)){
+        writeFile(folder, fileName, data)
+    } else {
+        createFolder(folder)
+        createFile(folder, fileName, data)
+    }
+}
+
+export function createFileWithExtraSteps (folder: string, fileName: string, data: any){
     if (checkfolderExists(folder)){
         writeFile(folder, fileName, data)
     } else {

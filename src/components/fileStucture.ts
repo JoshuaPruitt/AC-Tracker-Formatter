@@ -20,35 +20,156 @@ export const ${updatedName} = [
         return data;
     };
 
-    attachDataFull(type: number, name: string, icon: string, description: string, month: number, time_of_day: number){
-        const data = 
+    attachDataFull(
+        type: number, 
+        name: string, 
+        icon: string, 
+        weather: number, 
+        month: number[], 
+        time_of_day: number[], 
+        totalCatches: number,
+
+        optional?: {
+            bugLocation?: number,
+            fishLocation?: number,
+
+            seaCreatureShadowSize?: number,
+            seaCreatureShadowMovement?: number,
+        }
+    ){
+        if(type === 1 && optional && optional.bugLocation){
+            const data = 
 `
     {
         type : ${type},
         name : "${name}",
         icon : ${icon},
-        description : "${description}",
+        weather: ${weather},
         month : ${month},
-        time_of_day : ${time_of_day}
+        time_of_day : ${time_of_day},
+        totalCatches: ${totalCatches},
+
+        bugLocation: ${optional.bugLocation}
+    },
+`;
+            return data;
+
+        } else if (type === 2 && optional && optional.fishLocation){
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: ${weather},
+        month : ${month},
+        time_of_day : ${time_of_day},
+        totalCatches: ${totalCatches},
+
+        fishLocation: ${optional.fishLocation},
     },
 `;
         return data;
+        } else if (type === 3 && optional && optional.seaCreatureShadowMovement && optional.seaCreatureShadowSize){
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: ${weather},
+        month : ${month},
+        time_of_day : ${time_of_day},
+        totalCatches: ${totalCatches},
+
+        seaCreatureShadowMoveMent: ${optional.seaCreatureShadowMovement},
+        seaCreatureShadowSize: ${optional.seaCreatureShadowSize},
+    },
+`;
+        return data;
+        } else {
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: ${weather},
+        month : ${month},
+        time_of_day : ${time_of_day},
+        totalCatches: ${totalCatches},
+    },
+`;
+            return data;
+        }
     };
 
     attachDataPartial(type: number, name: string, icon: string){
-        const data = 
+        if(type === 1){
+            const data = 
 `
     {
         type : ${type},
         name : "${name}",
         icon : ${icon},
-        description : "",
-        month : 1,
-        time_of_day : 1
+        weather: 0,
+        month : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        time_of_day : [0, 24], 
+        totalCatches: 20,
+
+        bugLocation: 0,
     },
 `;
-        return data;
-    };
+            return data;
+        } else if (type === 2){
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: 0,
+        month : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        time_of_day : [0, 24], 
+        totalCatches: 20,
+
+        fishLocation: 0,
+    },
+`;
+            return data;
+        } else if (type === 3){
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: 0,
+        month : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        time_of_day : [0, 24], 
+        totalCatches: 20,
+
+        seaCreatureShadowMoveMent: 0,
+        seaCreatureShadowSize: 0,
+    },
+`;
+            return data;
+        } else {
+            const data = 
+`
+    {
+        type : ${type},
+        name : "${name}",
+        icon : ${icon},
+        weather: 0,
+        month : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        time_of_day : [0, 24], 
+        totalCatches: 20,
+    },
+`;
+            return data
+        }
+    }
 
     attachFooter(){
         const data = 

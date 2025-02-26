@@ -1,15 +1,7 @@
-import {createFile, getAllFiles} from "./components/createFile"
+import {createFile, getAllFiles, createFileWithExtraSteps} from "./components/createFile"
 import FileBuild from "./components/fileStucture";
 import inquirer from "inquirer"
 
-const data = 
-`
-const data = [
-    {
-        name : "book1"
-    }
-]
-`;
 
 inquirer
     .prompt([
@@ -40,10 +32,13 @@ inquirer
         //create formatted data
         const newFile = new FileBuild
         const data = newFile.formatData(files, directory, fileName)
-
-        //create an output file
-        createFile("./output/", fileName, data)
-
+        
+        if(fullChoice == true){
+            createFileWithExtraSteps('./output/', fileName, data)
+        } else {
+            //create an output file
+            createFile("./output/", fileName, data)
+        }
     })
     .catch((err) => {
         if (err.isTtyError){
