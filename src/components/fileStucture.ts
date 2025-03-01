@@ -50,13 +50,13 @@ export const ${updatedName} = [
         icon : ${icon},
         weather: ${weather},
         month : {
-            north: ${month.north},
-            south: ${month.south},
+            north: [${month.north}],
+            south: [${month.south}],
         },
-        time_of_day : ${time_of_day},
+        time_of_day : [${time_of_day}],
         totalCatches: ${totalCatches},
 
-        bugLocation: ${optional.bugLocation}
+        bugLocation: '${optional.bugLocation}'
     },
 `;
             return data;
@@ -70,13 +70,13 @@ export const ${updatedName} = [
         icon : ${icon},
         weather: ${weather},
         month : {
-            north: ${month.north},
-            south: ${month.south},
+            north: [${month.north}],
+            south: [${month.south}],
         },
-        time_of_day : ${time_of_day},
+        time_of_day : [${time_of_day}],
         totalCatches: ${totalCatches},
 
-        fishLocation: ${optional.fishLocation},
+        fishLocation: '${optional.fishLocation}',
     },
 `;
         return data;
@@ -89,14 +89,14 @@ export const ${updatedName} = [
         icon : ${icon},
         weather: ${weather},
         month : {
-            north: ${month.north},
-            south: ${month.south},
+            north: [${month.north}],
+            south: [${month.south}],
         },
-        time_of_day : ${time_of_day},
+        time_of_day : [${time_of_day}],
         totalCatches: ${totalCatches},
 
-        seaCreatureShadowMoveMent: ${optional.seaCreatureShadowMovement},
-        seaCreatureShadowSize: ${optional.seaCreatureShadowSize},
+        seaCreatureShadowMoveMent: '${optional.seaCreatureShadowMovement}',
+        seaCreatureShadowSize: '${optional.seaCreatureShadowSize}',
     },
 `;
         return data;
@@ -109,10 +109,10 @@ export const ${updatedName} = [
         icon : ${icon},
         weather: ${weather},
         month : {
-            north: ${month.north},
-            south: ${month.south},
+            north: [${month.north}],
+            south: [${month.south}],
         },
-        time_of_day : ${time_of_day},
+        time_of_day : [${time_of_day}],
         totalCatches: ${totalCatches},
     },
 `;
@@ -136,7 +136,7 @@ export const ${updatedName} = [
         time_of_day : [0, 24], 
         totalCatches: 20,
 
-        bugLocation: 0,
+        bugLocation: '',
     },
 `;
             return data;
@@ -155,7 +155,7 @@ export const ${updatedName} = [
         time_of_day : [0, 24], 
         totalCatches: 20,
 
-        fishLocation: 0,
+        fishLocation: '',
     },
 `;
             return data;
@@ -174,8 +174,8 @@ export const ${updatedName} = [
         time_of_day : [0, 24], 
         totalCatches: 20,
 
-        seaCreatureShadowMoveMent: 0,
-        seaCreatureShadowSize: 0,
+        seaCreatureShadowMoveMent: '',
+        seaCreatureShadowSize: '',
     },
 `;
             return data;
@@ -734,8 +734,9 @@ export const ${updatedName} = [
                 console.log(`Total Catches: ${location}`)
 
                 const time_of_day = [start_time, end_time]
+                const weatherData = this.changeWeatherToData(weather)
                 const monthsData = this.changeMonthsToData(month_north, month_south)
-                const entryData = this.attachDataFull(1, UcurrentItemName, currentItemName, weather, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {bugLocation: location})
+                const entryData = this.attachDataFull(1, UcurrentItemName, itemImportName, weatherData, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {bugLocation: location})
                 formattedData += entryData
 
 
@@ -750,8 +751,9 @@ export const ${updatedName} = [
                 console.log(`Total Catches: ${total_catches}`)
 
                 const time_of_day = [start_time, end_time]
+                const weatherData = this.changeWeatherToData(weather)
                 const monthsData = this.changeMonthsToData(month_north, month_south)
-                const entryData = this.attachDataFull(2, UcurrentItemName, currentItemName, weather, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {fishLocation: location})
+                const entryData = this.attachDataFull(2, UcurrentItemName, itemImportName, weatherData, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {fishLocation: location})
                 formattedData += entryData
 
             } else if (updatedParentDirPath == 'sea-creature' || updatedParentDirPath == 'sea-critter' || updatedParentDirPath == 'sea-creatures' || updatedParentDirPath == 'sea-critters'){
@@ -765,8 +767,9 @@ export const ${updatedName} = [
                 console.log(`Total Catches: ${total_catches}`)
 
                 const time_of_day = [start_time, end_time]
+                const weatherData = this.changeWeatherToData(weather)
                 const monthsData = this.changeMonthsToData(month_north, month_south)
-                const entryData = this.attachDataFull(3, UcurrentItemName, currentItemName, weather, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {seaCreatureShadowMovement: seaCreatureShadowSpeed, seaCreatureShadowSize: seaCreatureShadowSize})
+                const entryData = this.attachDataFull(3, UcurrentItemName, itemImportName, weatherData, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches, {seaCreatureShadowMovement: seaCreatureShadowSpeed, seaCreatureShadowSize: seaCreatureShadowSize})
                 formattedData += entryData
 
             } else {
@@ -780,8 +783,9 @@ export const ${updatedName} = [
                 console.log(`Total Catches: ${total_catches}`)
 
                 const time_of_day = [start_time, end_time]
+                const weatherData = this.changeWeatherToData(weather)
                 const monthsData = this.changeMonthsToData(month_north, month_south)
-                const entryData = this.attachDataFull(0, UcurrentItemName, currentItemName, weather, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches)
+                const entryData = this.attachDataFull(0, UcurrentItemName, itemImportName, weatherData, {north: monthsData.northern_hemiStart, south: monthsData.southern_hemiStart},time_of_day, total_catches)
                 formattedData += entryData
             }
         }
@@ -789,6 +793,18 @@ export const ${updatedName} = [
 
         formattedData += footer
         return formattedData
+    }
+
+    changeWeatherToData(weather: any){
+        if(weather == 'All weather'){
+            return 0
+        } else if (weather == "All except rain"){
+            return 1
+        } else if (weather == "Only on rain"){
+            return 2
+        } else {
+            return 0
+        }
     }
 
     changeMonthsToData(northern_hemisphere: string[], southern_hemisphere: string[]){

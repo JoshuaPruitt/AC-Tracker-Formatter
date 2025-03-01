@@ -31,9 +31,11 @@ inquirer
 
         //create formatted data
         if(fullChoice == true){
-            const newFile = new FileBuild
-            const data = newFile.formatDataFull(files, directory, fileName)
-            createFile('./output/', fileName, data)
+            // const newFile = new FileBuild
+            // const data = await newFile.formatDataFull(files, directory, fileName)
+            // createFile('./output/', fileName, data)
+
+            writeDataFull(files, directory, fileName)
 
         } else {
             const newFile = new FileBuild
@@ -49,6 +51,12 @@ inquirer
             console.error("Error with inquirer:", err)
         }
 });
+
+const writeDataFull = async (files: any, directory: any, fileName: any) => {
+    const newFile = new FileBuild
+    const data = await newFile.formatDataFull(files, directory, fileName)
+    createFile('./output/', fileName, data)
+};
 
 
 // const runFormatter = () => {
