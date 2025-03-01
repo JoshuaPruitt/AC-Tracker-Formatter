@@ -57,14 +57,14 @@ export function createFile (folder: string, fileName: string, data: any) {
     }
 }
 
-export function createFileWithExtraSteps (folder: string, fileName: string, data: any){
-    if (checkfolderExists(folder)){
-        writeFile(folder, fileName, data)
-    } else {
-        createFolder(folder)
-        createFile(folder, fileName, data)
-    }
-}
+// export function createFileWithExtraSteps (folder: string, fileName: string, data: any){
+//     if (checkfolderExists(folder)){
+//         writeFile(folder, fileName, data)
+//     } else {
+//         createFolder(folder)
+//         createFile(folder, fileName, data)
+//     }
+// }
 
 export function getAllFiles(dirPath: string, fileList: [] | never = []) {
     const files = fs.readdirSync(dirPath);

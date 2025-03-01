@@ -1,4 +1,4 @@
-import {createFile, getAllFiles, createFileWithExtraSteps} from "./components/createFile"
+import {createFile, getAllFiles} from "./components/createFile"
 import FileBuild from "./components/fileStucture";
 import inquirer from "inquirer"
 
@@ -30,15 +30,17 @@ inquirer
         console.log(fullChoice)
 
         //create formatted data
-        const newFile = new FileBuild
-        const data = newFile.formatData(files, directory, fileName)
-        
         if(fullChoice == true){
-            createFileWithExtraSteps('./output/', fileName, data)
+            const newFile = new FileBuild
+            const data = newFile.formatDataFull(files, directory, fileName)
+            createFile('./output/', fileName, data)
+
         } else {
-            //create an output file
-            createFile("./output/", fileName, data)
+            const newFile = new FileBuild
+            const data = newFile.formatData(files, directory, fileName)
+            createFile('./output/', fileName, data)
         }
+
     })
     .catch((err) => {
         if (err.isTtyError){
@@ -46,7 +48,7 @@ inquirer
         } else {
             console.error("Error with inquirer:", err)
         }
-    });
+});
 
 
 // const runFormatter = () => {
