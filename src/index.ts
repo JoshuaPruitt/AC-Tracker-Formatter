@@ -13,7 +13,7 @@ inquirer
 
         {
             type: "input",
-            message: "Where is the directory of the files you wish to use?",
+            message: "Where is the directory of the files you wish to use? (No quotation marks around the directory)",
             name: 'directory'
         },
 
@@ -26,14 +26,12 @@ inquirer
     .then(({fileName, directory, fullChoice}) => {
         //get files
         const files = getAllFiles(directory)
+        // const updatedDirectory = directory.replace(/^['"]|['"]$/g, '');
 
         console.log(fullChoice)
 
         //create formatted data
         if(fullChoice == true){
-            // const newFile = new FileBuild
-            // const data = await newFile.formatDataFull(files, directory, fileName)
-            // createFile('./output/', fileName, data)
 
             writeDataFull(files, directory, fileName)
 

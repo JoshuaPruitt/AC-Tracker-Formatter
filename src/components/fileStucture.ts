@@ -464,13 +464,14 @@ export const ${updatedName} = [
             {
                 type: 'list',
                 name: 'location',
-                message: "What time does your fish start to appear?",
+                message: "Where does this fish appear?",
                 choices: [
                     'River',
                     'Pond',
                     "River (Clifftop)",
                     "River (Mouth)",
                     "Sea",
+                    "Pier"
                 ]
             }
         ];
@@ -813,8 +814,6 @@ export const ${updatedName} = [
         let southern_hemiStart: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         for(let i = 0; i < northern_hemisphere.length; i++){
-            console.log("Should run 12 times: this has run", i, " times" )
-            console.log(`Northern Hemisphere: Changing index ${i} due to northern_hemisphere ${northern_hemisphere[i]}`)
             if(northern_hemisphere[i] == "January"){
                 northern_hemiStart[0] = 1;
             } else if(northern_hemisphere[i] == "Febuary"){
@@ -869,8 +868,6 @@ export const ${updatedName} = [
         }
 
         for(let i = 0; i < southern_hemisphere.length; i++){
-            console.log("Should run 12 times: this has run", i, " times" )
-            console.log(`Southern Hemisphere: Changing index ${i} due to southern_hemisphere ${southern_hemisphere[i]}`)
             if(southern_hemisphere[i] == "January"){
                 southern_hemiStart[0] = 1;
             } else if(southern_hemisphere[i] == "Febuary"){
