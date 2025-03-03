@@ -25,26 +25,33 @@ const createFolder = (folderPath: string) => {
     console.log("Creating folder")
 }
 
+
 const writeFile = (folder: string, fileName: string, data: any) => {
+    let filePath = path.join(folder, fileName);
+    let ext = path.extname(fileName);
+    let baseName = path.basename(fileName, ext)
+    let counter = 1;
+
     console.log('folder:', folder)
-    console.log("0:", folder += fileName)
-    // Bug causing written files to have the name appended to the end of the file name
-    fs.writeFile(folder += fileName, data, {flag: 'wx'},
-        (err) => {
-        if (err){
-            let updatedFileName;
-            i++;
-            console.log("File Already Exists! Adding number to file name.");
-            console.log("1", fileName)
-            updatedFileName = fileName.replace('.ts', '')
-            console.log("2", updatedFileName)
-            updatedFileName = updatedFileName + `${i}` + '.ts';
-            console.log("3", updatedFileName)
-            writeFile(folder, updatedFileName, data);
+    console.log("0:", path.join(folder, fileName))
+
+    const tryWriteFile = (currentPath: string) => {
+        fs.writeFile(currentPath, data, {flag: 'wx'}, (err) => {
+            if (err){
+                if (err.code === "EEXIST"){
+                    const newFilePath = path.join(folder, `${baseName} (${counter})${ext}`);
+                    counter++;
+                    tryWriteFile(newFilePath);
+                } else {
+                    console.error("Error writing file:", err);
+                }
             } else {
-                console.log('File was written to Successfully!');
+                console.log('File was written successfully:', currentPath);
             }
         })
+    }
+
+    tryWriteFile(filePath)
 }
 
 export function createFile (folder: string, fileName: string, data: any) {
@@ -57,14 +64,6 @@ export function createFile (folder: string, fileName: string, data: any) {
     }
 }
 
-// export function createFileWithExtraSteps (folder: string, fileName: string, data: any){
-//     if (checkfolderExists(folder)){
-//         writeFile(folder, fileName, data)
-//     } else {
-//         createFolder(folder)
-//         createFile(folder, fileName, data)
-//     }
-// }
 
 export function getAllFiles(dirPath: string, fileList: [] | never = []) {
     const files = fs.readdirSync(dirPath);
@@ -85,6 +84,3 @@ export function getAllFiles(dirPath: string, fileList: [] | never = []) {
     return fileList;
 };
   
-//   const directoryPath = './your_directory';
-//   const allFiles = getAllFiles(directoryPath);
-//   console.log(allFiles);

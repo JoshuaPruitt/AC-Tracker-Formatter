@@ -16,6 +16,7 @@ import ${name} from "${path}";`;
         updatedName = updatedName.replace('-', '_');
         const data = 
 `
+
 export const ${updatedName} = [
 `;
         return data;
@@ -870,30 +871,30 @@ export const ${updatedName} = [
         for(let i = 0; i < southern_hemisphere.length; i++){
             console.log("Should run 12 times: this has run", i, " times" )
             console.log(`Southern Hemisphere: Changing index ${i} due to southern_hemisphere ${southern_hemisphere[i]}`)
-            if(northern_hemisphere[i] == "January"){
-                northern_hemiStart[0] = 1;
-            } else if(northern_hemisphere[i] == "Febuary"){
-                northern_hemiStart[1] = 1;
-            } else if(northern_hemisphere[i] == "March"){
-                northern_hemiStart[2] = 1;
-            } else if(northern_hemisphere[i] == "April"){
-                northern_hemiStart[3] = 1;
-            } else if(northern_hemisphere[i] == "May"){
-                northern_hemiStart[4] = 1;
-            } else if(northern_hemisphere[i] == "June"){
-                northern_hemiStart[5] = 1;
-            } else if(northern_hemisphere[i] == "July"){
-                northern_hemiStart[6] = 1;
-            } else if(northern_hemisphere[i] == "August"){
-                northern_hemiStart[7] = 1;
-            } else if(northern_hemisphere[i] == "September"){
-                northern_hemiStart[8] = 1;
-            } else if(northern_hemisphere[i] == "October"){
-                northern_hemiStart[9] = 1;
-            } else if(northern_hemisphere[i] == "November"){
-                northern_hemiStart[10] = 1;
-            } else if(northern_hemisphere[i] == "December"){
-                northern_hemiStart[11] = 1;
+            if(southern_hemisphere[i] == "January"){
+                southern_hemiStart[0] = 1;
+            } else if(southern_hemisphere[i] == "Febuary"){
+                southern_hemiStart[1] = 1;
+            } else if(southern_hemisphere[i] == "March"){
+                southern_hemiStart[2] = 1;
+            } else if(southern_hemisphere[i] == "April"){
+                southern_hemiStart[3] = 1;
+            } else if(southern_hemisphere[i] == "May"){
+                southern_hemiStart[4] = 1;
+            } else if(southern_hemisphere[i] == "June"){
+                southern_hemiStart[5] = 1;
+            } else if(southern_hemisphere[i] == "July"){
+                southern_hemiStart[6] = 1;
+            } else if(southern_hemisphere[i] == "August"){
+                southern_hemiStart[7] = 1;
+            } else if(southern_hemisphere[i] == "September"){
+                southern_hemiStart[8] = 1;
+            } else if(southern_hemisphere[i] == "October"){
+                southern_hemiStart[9] = 1;
+            } else if(southern_hemisphere[i] == "November"){
+                southern_hemiStart[10] = 1;
+            } else if(southern_hemisphere[i] == "December"){
+                southern_hemiStart[11] = 1;
             }
             // switch(southern_hemisphere[i]){
             //     case "January":

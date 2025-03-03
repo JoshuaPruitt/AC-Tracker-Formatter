@@ -57,12 +57,3 @@ const writeDataFull = async (files: any, directory: any, fileName: any) => {
     const data = await newFile.formatDataFull(files, directory, fileName)
     createFile('./output/', fileName, data)
 };
-
-
-// const runFormatter = () => {
-//     console.log("Formatter started!")
-//     createFile("./output/","data.ts")
-// }
-
-// //initialize
-// runFormatter()
